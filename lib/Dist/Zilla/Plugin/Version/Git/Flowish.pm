@@ -11,10 +11,10 @@ with (
 
 =head1 SYNOPSIS
 
-[Version::Git::Flowish]
-master_regexp = ^master$
-release_regexp = ^release-(\d+.\d+\.\d+)$
-tag_regexp = ^(\d.\d+\.\d+)$
+    # [Version::Git::Flowish]
+    # master_regexp = ^master$
+    # release_regexp = ^release-(\d+.\d+\.\d+)$
+    # tag_regexp = ^(\d.\d+\.\d+)$
 
 =head1 DESCRIPTION
 
