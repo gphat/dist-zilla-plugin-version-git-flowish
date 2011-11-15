@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Version-Git-Flowish
 
 {{$NEXT}}
+  - Fix deps
 
 0.02 Nov 14 2011
 
