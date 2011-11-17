@@ -104,12 +104,10 @@ sub provide_version {
     given($branch) {
 
         when(/$master_re/) {
-            print STDERR "WEEE\n";
             # If the branch is master then we'll get the most recent tag and
             # use it as the version number.
             $self->log_debug([ 'fetching latest tag due to master branch' ]);
             my $tag = `git describe --tags --abbrev=0`;
-            print STDERR "$tag\n";
             $tag =~ /$tag_re/;
             $version = $1;
         }
