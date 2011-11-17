@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Version-Git-Flowish
 
 {{$NEXT}}
+  - Remove debugging that was left in
 
 0.03 Nov 15 2011
   - Fix deps
