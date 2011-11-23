@@ -117,6 +117,10 @@ sub provide_version {
             # branch name.
             $version = $1;
         }
+        default {
+            $self->log_fatal("Couldn't find a version from master or release. Check regexp?");
+        }
+        
     }
 
     $self->log_debug([ 'returning version %s' ]);
