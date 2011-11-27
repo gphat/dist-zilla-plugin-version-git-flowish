@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Version-Git-Flowish
 
 {{$NEXT}}
+  - Add dependency (Andreas Koenig)
 
 0.05 Nov 22 2011
   - Add some logging to clarify when we can't find a version (Mike Eldridge)
