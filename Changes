@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Plugin-Version-Git-Flowish
 
 {{$NEXT}}
+
+0.07 Dec 8 2011
   - Add environment variable FLOWISH_EXTRA_VERSION to add onto version number.
 
 0.06 Nov 27 2011
