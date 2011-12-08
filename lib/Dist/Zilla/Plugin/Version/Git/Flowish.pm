@@ -32,7 +32,7 @@ shown in the Synopsis.
 
 It works like this:
 
-=head2 Environment Variable
+=head2 Environment Variable #1
 
 The environment variable FLOWISH_VERSION is checked and used if set.
 
@@ -56,6 +56,12 @@ You can influence how this date is parsed using the C<tag_regexp> option.
 
 If this isn't the master branch, but it begins with "release-" (configurable
 via C<master_regexp>) then the version number after the release- will be used.
+
+=head2 Environment Variable #2
+
+The environment variable FLOWISH_EXTRA_VERSION is checked and appending to the
+version with a hyphen as a separator.  This lets you create development
+versions of whathaveyou.
 
 =head2 And Then?
 
@@ -90,37 +96,47 @@ sub provide_version {
     $self->log_debug([ 'picked up branch %s', $branch ]);
     
     my $version = undef;
+    my $extra_version = $ENV{'FLOWISH_EXTRA_VERSION'};
 
     # Let an environment variable override the version.
     if(exists($ENV{'FLOWISH_VERSION'})) {
         $self->log_debug([ 'overriden by environment' ]);
-        return $ENV{'FLOWISH_VERSION'};
+        $version = $ENV{'FLOWISH_VERSION'}
+        $self->log_debug("Got version from environment");
     }
 
-    my $master_re = $self->master_regexp;
-    my $release_re = $self->release_regexp;
-    my $tag_re = $self->tag_regexp;
+    # Verify that we didn't already get a version from the ENV
+    if(!defined($version)) {
 
-    given($branch) {
+        my $master_re = $self->master_regexp;
+        my $release_re = $self->release_regexp;
+        my $tag_re = $self->tag_regexp;
 
-        when(/$master_re/) {
-            # If the branch is master then we'll get the most recent tag and
-            # use it as the version number.
-            $self->log_debug([ 'fetching latest tag due to master branch' ]);
-            my $tag = `git describe --tags --abbrev=0`;
-            $tag =~ /$tag_re/;
-            $version = $1;
+        given($branch) {
+
+            when(/$master_re/) {
+                # If the branch is master then we'll get the most recent tag and
+                # use it as the version number.
+                $self->log_debug([ 'fetching latest tag due to master branch' ]);
+                my $tag = `git describe --tags --abbrev=0`;
+                $tag =~ /$tag_re/;
+                $version = $1;
+            }
+            when(/$release_re/) {
+                $self->log_debug([ 'gleaning version from release branch' ]);
+                # If this is a release branch, grab the version number from the
+                # branch name.
+                $version = $1;
+            }
+            default {
+                $self->log_fatal("Couldn't find a version from master or release. Check regexp?");
+            }
         }
-        when(/$release_re/) {
-            $self->log_debug([ 'gleaning version from release branch' ]);
-            # If this is a release branch, grab the version number from the
-            # branch name.
-            $version = $1;
-        }
-        default {
-            $self->log_fatal("Couldn't find a version from master or release. Check regexp?");
-        }
-        
+    }
+
+    if(defined($extra_version)) {
+        $self->log_debug("Adding extra version from env");
+        $version .= '-'.$extra_version;
     }
 
     $self->log_debug([ 'returning version %s' ]);
