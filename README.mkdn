@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::Version::Git::Flowish - Get a version number via git and a 
 
 # VERSION
 
-version 0.06
+version 0.07
 
 # SYNOPSIS
 
@@ -29,7 +29,7 @@ shown in the Synopsis.
 
 It works like this:
 
-## Environment Variable
+## Environment Variable #1
 
 The environment variable FLOWISH_VERSION is checked and used if set.
 
@@ -53,6 +53,12 @@ You can influence how this date is parsed using the `tag_regexp` option.
 
 If this isn't the master branch, but it begins with "release-" (configurable
 via `master_regexp`) then the version number after the release- will be used.
+
+## Environment Variable #2
+
+The environment variable FLOWISH_EXTRA_VERSION is checked and appending to the
+version with an underscore as a separator.  This lets you create development
+versions of whathaveyou.
 
 ## And Then?
 

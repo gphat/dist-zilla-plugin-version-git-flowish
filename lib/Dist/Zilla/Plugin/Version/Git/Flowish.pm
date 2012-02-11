@@ -60,7 +60,7 @@ via C<master_regexp>) then the version number after the release- will be used.
 =head2 Environment Variable #2
 
 The environment variable FLOWISH_EXTRA_VERSION is checked and appending to the
-version with a hyphen as a separator.  This lets you create development
+version with an underscore as a separator.  This lets you create development
 versions of whathaveyou.
 
 =head2 And Then?
@@ -101,7 +101,7 @@ sub provide_version {
     # Let an environment variable override the version.
     if(exists($ENV{'FLOWISH_VERSION'})) {
         $self->log_debug([ 'overriden by environment' ]);
-        $version = $ENV{'FLOWISH_VERSION'}
+        $version = $ENV{'FLOWISH_VERSION'};
         $self->log_debug("Got version from environment");
     }
 
@@ -136,7 +136,7 @@ sub provide_version {
 
     if(defined($extra_version)) {
         $self->log_debug("Adding extra version from env");
-        $version .= '-'.$extra_version;
+        $version .= '_'.$extra_version;
     }
 
     $self->log_debug([ 'returning version %s', $version ]);
