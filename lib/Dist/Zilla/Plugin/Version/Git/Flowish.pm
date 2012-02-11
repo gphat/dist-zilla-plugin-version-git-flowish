@@ -38,7 +38,7 @@ The environment variable FLOWISH_VERSION is checked and used if set.
 
 =head2 Branch
 
-The current branch is attained via a call to git granch and grepping for
+The current branch is attained via a call to git branch and grepping for
 the leading *.
 
     git branch --no-color 2> /dev/null
