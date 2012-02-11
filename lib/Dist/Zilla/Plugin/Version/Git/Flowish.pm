@@ -94,7 +94,7 @@ sub provide_version {
     my ($branch) = `git branch --no-color 2> /dev/null` =~ /^\* (.*)/m;
 
     $self->log_debug([ 'picked up branch %s', $branch ]);
-    
+
     my $version = undef;
     my $extra_version = $ENV{'FLOWISH_EXTRA_VERSION'};
 
@@ -139,7 +139,7 @@ sub provide_version {
         $version .= '-'.$extra_version;
     }
 
-    $self->log_debug([ 'returning version %s' ]);
+    $self->log_debug([ 'returning version %s', $version ]);
     return $version;
 }
 
