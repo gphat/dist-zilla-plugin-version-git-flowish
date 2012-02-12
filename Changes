@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Version-Git-Flowish
 
 {{$NEXT}}
+  - Typo fix in POD. (John "genehack" Anderson)
 
 0.08 Feb 10 2012
   - provide the version in the formatted log_debug call (Mike Eldridge)
